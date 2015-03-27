@@ -1,0 +1,27 @@
+{
+  "name": "nodebb",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "serve-favicon": "*",
+    "underscore": "*",
+    "sequelize": "*",
+    "mysql": "*",
+    "lodash": "*",
+    "cors": "*",
+    "node-uuid": "*",
+    "bcrypt-nodejs": "*",
+    "moment": "*",
+    "express-jwt": "*",
+    "jsonwebtoken": "*",
+    "body-parser": "*",
+    "bluebird": "*",
+    "morgan": "*",
+    "method-override": "*",
+    "serve-static": "*"
+  }
+}
