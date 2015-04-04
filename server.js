@@ -33,7 +33,7 @@ app.use(function (err, req, res, next) {
   json.name = err.name || "UNKNOWN";
   json.message = err.message || "Unknown error";
   json.stack = err.stack || "No stack trace available";
-  res.status(500).send({
+  res.status(code).send({
     error: json
   });
 });
