@@ -5,13 +5,13 @@
 
 module.exports = function (app) {
   var db = app.db;
-  var dao = {};
+  var User = {};
 
   var util = require('../util');
   var bcrypt = require('bcrypt-nodejs');
 
-  dao.checkPassword = function (username, password, t) {
-    return dao.getByUsername(username, t)
+  User.checkPassword = function (username, password, t) {
+    return User.getByUsername(username, t)
       .then(function (user) {
         if (user) {
           if (bcrypt.compareSync(password, user.password)) {
@@ -25,17 +25,17 @@ module.exports = function (app) {
       });
   };
 
-  dao.getByUsername = function (username, t) {
+  User.getByUsername = function (username, t) {
     return db.User.find(util.addTrans(t, {where: {username: username}}));
   }
 
-  dao.getByEmail = function (email, t) {
+  User.getByEmail = function (email, t) {
     return db.User.find(util.addTrans(t, {where: {email: email}}));
   }
 
-  dao.create = function (user_data, t) {
+  User.create = function (user_data, t) {
     return db.User.create(user_data, util.addTrans(t, {}));
   }
 
-  return dao;
+  return User;
 }
