@@ -1,32 +1,25 @@
-
 module.exports = function (app) {
 
   var P = app.Promise;
   var db = app.db;
 
   var util = require('../util');
-  var dao = require('../dao')(db);
+  var dao = require('../dao')(app);
 
   return {
     create: function (req, res) {
       util.checkParams(req.body, ['description', 'date']);
 
       db.sequelize.transaction(function (t) {
-        P.all([dao.Client.getByEmail(req.body.client.email, t),
-          dao.Shop.getByToken(req.body.token, t)])
-          .spread(function (client, shop) {
-            if (!shop)
-              util.reject("No shop exists with token = " + token);
-            if (client) return P.all([client, shop]);
-            return P.all([dao.Client.createWithShop(req.body.client, shop, t), shop]);
+        return dao.User.getByUsername(req.user.username, t)
+          .then(function (user) {
+            if (!user) util.sendError(500, util.Error.ERR_ENTITY_NOT_FOUND, "User from token does not exist");
+            else return dao.Order.create(req.body, user, t);
           })
-          .spread(function (client, shop) {
-            return dao.Order.create(req.body.order, client, shop, t);
-          })
-          .then(util.commit.bindLeft(t), util.rollback.bindLeft(t))
-          .then(util.stdSeqSuccess.bindLeft(res), util.stdErr500.bindLeft(res))
-          .done();
-      });
+      })
+        .then(util.jsonResponse.bind(util, res))
+        .catch(util.resendError.bind(util, res))
+        .done();
     },
 
     getById: function (req, res) {
@@ -38,7 +31,7 @@ module.exports = function (app) {
     },
 
     getOrders: function (req, res) {
-      dao.Order.getUserOrders(req.user.username)
+      dao.Order.getUserOrders(req.user.username, {})
         .then(util.jsonResponse.bind(util, res))
         .catch(util.resendError.bind(util, res))
         .done();
