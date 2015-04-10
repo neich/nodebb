@@ -36,7 +36,7 @@ define([
   });
 
   Backbone.on('api:login:successful', function (user) {
-    localStorage.setItem('user', user);
+    Backbone.localStorage.setItem('user', user);
     app.navigate('orders', { trigger: true });
   });
 
