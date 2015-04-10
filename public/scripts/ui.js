@@ -1,5 +1,12 @@
-define(['views/user/login', 'views/user/signup', 'views/header', 'views/order/vl_orders'],
-  function (UserLogin, UserSignup, HeaderView, OrdersView) {
+define([
+    'backbone',
+    'api',
+    'collections/c_orders',
+    'views/user/login',
+    'views/user/signup',
+    'views/header',
+    'views/order/vl_orders'],
+  function (Backbone, Api, CollectionOrder, UserLogin, UserSignup, HeaderView, OrdersView) {
 
     var Ui = {};
 
@@ -9,7 +16,7 @@ define(['views/user/login', 'views/user/signup', 'views/header', 'views/order/vl
     var ordersView = new OrdersView();
 
     Ui.initialize = function () {
-      headerView.setUserData(window.localStorage.getItem('User') || {});
+      headerView.setUserData(Backbone.localStorage.getItem('user'));
     };
 
     Ui.showHome = function () {
@@ -20,12 +27,20 @@ define(['views/user/login', 'views/user/signup', 'views/header', 'views/order/vl
       signupView.render();
     }
 
-    Ui.showOrders = function() {
-      ordersView.render();
+    Ui.showOrders = function () {
+      var orders = new CollectionOrder();
+      orders.fetch({
+        success: ordersView.render.bind(ordersView),
+        error: Ui.errorBackbone
+      });
+    }
+
+    Ui.errorBackbone  = function (data, res) {
+      alert("Error: " + res.responseJSON.error.message);
     }
 
     // This always receive a JSON object with a standard API error
-    Ui.error = function (err) {
+    Ui.error = function (err, err2) {
       alert("Error: " + err.message);
     }
 
@@ -36,11 +51,11 @@ define(['views/user/login', 'views/user/signup', 'views/header', 'views/order/vl
 
     // Event subscription
 
-    Backbone.on('api:login:error', function (data, res) {
+    Backbone.on('api:login:error', function (res) {
       Ui.error(res.responseJSON.error);
     });
 
-    Backbone.on('api:signup:error', function (data, res) {
+    Backbone.on('api:signup:error', function (res) {
       Ui.error(res.responseJSON.error);
     });
 
