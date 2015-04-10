@@ -31,7 +31,7 @@ define([
       };
       Api.signup(data)
         .then(Backbone.trigger.bind(Backbone, 'api:signup:successful'))
-        .catch(Backbone.trigger.bind(Backbone, 'api:signup:error', data))
+        .catch(Backbone.trigger.bind(Backbone, 'api:signup:error'))
     },
 
     render: function() {
