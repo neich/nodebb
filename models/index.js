@@ -64,7 +64,7 @@ module.exports = function (app) {
 
     sequelize.authenticate().complete(function (err) {
         if (!!err) {
-            df.throwError(err);
+            df.reject(err);
         } else {
             console.log('Connection has been established successfully.');
             fs.readdirSync(__dirname).filter(function (file) {
