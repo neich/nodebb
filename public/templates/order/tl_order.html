@@ -23,14 +23,7 @@
                 <ul class="list-group">
                     <% orders.each(function(o) { %>
                     <li class="list-group-item">
-                        <div class="checkbox">
-                            <input type="checkbox" id="checkbox"/>
-                            <label for="checkbox">
-                                <%= o.id %>
-                            </label>
-                        </div>
-                        <div class="pull-right">
-                            <%= o.description %>
+                        <span>Id: <%= o.get('id') %>, description: <%= o.get('description') %>
                         </div>
                     </li>
                     <% }); %>
