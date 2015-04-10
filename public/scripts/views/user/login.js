@@ -27,7 +27,7 @@ define([
       var data = {username: this.$('#login-username').val(), password: this.$('#login-password').val()};
       Api.login(data)
         .then(Backbone.trigger.bind(Backbone, 'api:login:successful'))
-        .catch(Backbone.trigger.bind(Backbone, 'api:login:error', data))
+        .catch(Backbone.trigger.bind(Backbone, 'api:login:error'))
     },
 
     render: function() {
