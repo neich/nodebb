@@ -11,17 +11,15 @@ define([
   var $content = $('#content');
 
   var OrderListView = Backbone.View.extend({
-
-    template: _.template(tl_order),
-
+    
     className: 'container',
 
     initialize: function () {
     },
 
-    render: function() {
+    render: function(orders) {
       $content.empty();
-      this.$el.html(this.template());
+      this.$el.html(_.template(tl_order, {orders: orders}));
       this.delegateEvents();
       $content.append(this.$el);
       return this;
