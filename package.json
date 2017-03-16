@@ -16,10 +16,9 @@
     "node-uuid": "*",
     "bcrypt-nodejs": "*",
     "moment": "*",
-    "express-jwt": "*",
+    "express-session": "*",
     "jsonwebtoken": "*",
     "body-parser": "*",
-    "bluebird": "*",
     "morgan": "*",
     "method-override": "*",
     "serve-static": "*"

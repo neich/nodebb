@@ -24,10 +24,9 @@
                     <% orders.each(function(o) { %>
                     <li class="list-group-item">
                         <span>Id: <%= o.get('id') %>, description: <%= o.get('description') %>
-                        </div>
+                        </span>
                     </li>
                     <% }); %>
-
                 </ul>
             </div>
             <div class="panel-footer">
@@ -36,20 +35,6 @@
                         <h6>
                             Total Count <span class="label label-info"><%= orders.length %></span></h6>
                     </div>
-                    <!--
-                    <div class="col-md-6">
-                        <ul class="pagination pagination-sm pull-right">
-                            <li class="disabled"><a href="javascript:void(0)">«</a></li>
-                            <li class="active"><a href="javascript:void(0)">1 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li><a href="http://www.jquery2dotnet.com">2</a></li>
-                            <li><a href="http://www.jquery2dotnet.com">3</a></li>
-                            <li><a href="http://www.jquery2dotnet.com">4</a></li>
-                            <li><a href="http://www.jquery2dotnet.com">5</a></li>
-                            <li><a href="javascript:void(0)">»</a></li>
-                        </ul>
-                    </div>
-                    -->
                 </div>
             </div>
         </div>

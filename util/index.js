@@ -10,21 +10,10 @@ exports.throwError = function (code, type, reason, prevErr) {
   throw err;
 }
 
-exports.resendError = function (res, err) {
-  var code = err.code || 500;
-  var stack = err.stack;
-  var json = {};
-  json.type = err.type || error.ERR_UNKNOWN;
-  json.message = err.message || "Unknown error";
-  res.status(code).json({
-    error: json
-  });
-}
-
-exports.sendError = function (res, code, type, reason) {
+exports.sendError = function (res, code, type, err) {
   var json = {};
   json.type = type || error.ERR_UNKNOWN;
-  json.message = reason || "Unknown error";
+  json.message = err.message || err || "Unknown error";
   res.status(code || 500).json({ error: json });
 }
 

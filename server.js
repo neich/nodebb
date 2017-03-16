@@ -7,10 +7,12 @@ var favicon = require('serve-favicon');
 var morgan = require('morgan');
 var methodOverride = require('method-override');
 var serveStatic = require('serve-static');
-
-var secret = '63?gdº93!6dg36dºb36%Vv57V%c$%/(!V497';
+var session = require('express-session')
+var bcrypt = require('bcrypt-nodejs');
 
 var app = express();
+
+// Application configuration
 
 app.set('port', process.env.PORT || 3000)
 
@@ -25,7 +27,10 @@ app.use(function (error, req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(methodOverride());
 app.use(cors());
+app.use(session({secret: '63?gdº93!6dg36dºb36%Vv57V%c$%/(!V497'}))
+
 app.use(serveStatic(path.join(__dirname, 'public'), {'index': ['index.html', 'index.htm']}));
+
 app.use(function (err, req, res, next) {
   var code = err.code || 500;
   var json = {};
@@ -38,30 +43,24 @@ app.use(function (err, req, res, next) {
   });
 });
 
-app.secret = secret;
-// app.Promise = require('when');
-app.Promise = require('bluebird');
-app.Promise.defer =  function () {
-  var resolve, reject;
-  var promise = new app.Promise(function() {
-    resolve = arguments[0];
-    reject = arguments[1];
-  });
-  return {
-    resolve: resolve,
-    reject: reject,
-    promise: promise
-  };
-}
 
-var db = require('./models')(app);
+// Database initialization
 
-app.db = db;
+app.db = require('./models')
 
-db.initPromise
+app.db.init(app.get('env'))
+  .then(function() {
+    return app.db.User.create({username: 'jo', password: bcrypt.hashSync('jo'), email: 'jo@jo.com'})
+  })
+  .then(function(user) {
+    return app.db.Order.create({description: 'My first order'})
+      .then(function(order) {
+        return order.setUser(user)
+      });
+  })
   .then(function () {
-
-    var rest = require('./rest.js')(app);
+    app.use(require('./routers/noAuthRouter')(app));
+    app.use(require('./routers/authRouter')(app));
 
     var port = process.env.OPENSHIFT_NODEJS_PORT || app.get('port');
     var ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
@@ -70,7 +69,8 @@ db.initPromise
       console.log("Express server listening on " + ip + ":" + port);
     })
 
-  }, function (err) {
+  })
+  .catch(function (err) {
     console.log("Error initializing database: " + err);
   })
   .done();
