@@ -6,7 +6,14 @@ var Header = Backbone.View.extend({
 
   initialize: function (params) {
     this.template = _.template(t_header)
-    params.eventBus.on('localstorage:set:user', this.setUserData.bind(this))
+    if (params.user)
+      this.setUserData(params.user)
+
+    var view = this
+    params.eventBus.on('localstorage:set:user', function(user) {
+      view.setUserData(user)
+      view.render()
+    })
   },
 
   render: function () {
@@ -16,7 +23,6 @@ var Header = Backbone.View.extend({
 
   setUserData: function (user) {
     userData = user
-    this.render()
   }
 
 })

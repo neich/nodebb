@@ -8,10 +8,6 @@ var OrdersView = require("../views/order/vl_orders")
 
 var Ui = {}
 
-// Views that can be rendered at #content
-var loginView = new UserLogin({eventBus: EventBus})
-var signupView = new UserSignup({eventBus: EventBus})
-
 var orderList = new CollectionOrder({eventBus: EventBus})
 var ordersView = new OrdersView({collection: orderList, eventBus: EventBus})
 
@@ -25,34 +21,35 @@ Ui.switchContent = function (widget) {
   args.shift()
   switch (widget) {
     case 'login': {
-      $content.html(loginView.render.apply(loginView, args).el)
-      loginView.delegateEvents()
+      new UserLogin({el: $content, eventBus: EventBus}).render()
       break
     }
     case 'signup': {
-      $content.html(signupView.render.apply(signupView, args).el)
-      signupView.delegateEvents()
+      new UserSignup({el: $content, eventBus: EventBus}).render()
       break
     }
     case 'orders': {
-      orderList.fetch({
-        success: function () {
-          $content.html(ordersView.render.apply(ordersView, args).el)
-          ordersView.delegateEvents()
-        },
-        error: Ui.error
-      });
+      if (localStorage.hasItem('user')) {
+        orderList.fetch({
+          success: function () {
+            new OrdersView({el: $content, eventBus: EventBus, collection: orderList}).render()
+          },
+          error: Ui.error
+        });
+      } else
+        Ui.showHome()
       break
     }
   }
 }
 
 Ui.init = function () {
-  headerView.setUserData(localStorage.getItem('user'))
-  Ui.showHome();
+  // headerView.setUserData(localStorage.getItem('user'))
+  // Ui.showHome();
 }
 
 Ui.showHome = function () {
+  new HeaderView({el: '#header', eventBus: EventBus, user: localStorage.getItem('user')}).render()
   if (localStorage.hasItem('user')) {
     Ui.switchContent('orders')
   } else {
