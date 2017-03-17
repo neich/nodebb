@@ -1,15 +1,15 @@
 {
   "name": "nodebb",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "*",
+    "express": "^4",
     "serve-favicon": "*",
     "underscore": "*",
-    "sequelize": "*",
+    "sequelize": "^3",
     "mysql": "*",
     "lodash": "*",
     "cors": "*",
