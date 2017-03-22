@@ -16,7 +16,6 @@ module.exports = function (app) {
   var util = require('../util');
   var dao = require('../dao')(app);
   var bcrypt = require('bcrypt-nodejs');
-  var jwt = require('jsonwebtoken');
 
   return {
     login: function (req, res) {
@@ -25,7 +24,6 @@ module.exports = function (app) {
       dao.User.checkPassword(req.body.username, req.body.password)
         .then(function (user) {
           req.session.username = user.username
-          req.session.save()
           util.jsonResponse(res, {username: user.username});
         })
         .catch(util.sendError.bind(util, res, 400, util.Error.ERR_BAD_REQUEST))
