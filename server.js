@@ -24,10 +24,13 @@ app.use(function (error, req, res, next) {
   error.code = 400;
   next(error);
 })
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(methodOverride());
 app.use(cors());
-app.use(session({secret: '63?gdº93!6dg36dºb36%Vv57V%c$%/(!V497'}))
+app.use(session({
+  secret: '63?gdº93!6dg36dºb36%Vv57V%c$%/(!V497',
+  resave: true,
+  saveUninitialized: true
+}))
 
 app.use(serveStatic(path.join(__dirname, 'public'), {'index': ['index.html', 'index.htm']}));
 
