@@ -9,11 +9,8 @@ var OrdersView = require("../views/order/vl_orders")
 var Ui = {}
 
 var orderList = new CollectionOrder({eventBus: EventBus})
-var ordersView = new OrdersView({collection: orderList, eventBus: EventBus})
 
 var $content = $('#content')
-
-var headerView = new HeaderView({el: '#header', eventBus: EventBus})
 
 Ui.switchContent = function (widget) {
 
@@ -61,13 +58,6 @@ Ui.showSignup = function () {
   Ui.switchContent('signup')
 }
 
-Ui.showOrders = function () {
-  orderList.fetch({
-    success: Ui.switchContent.bind(Ui, 'orders'),
-    error: Ui.error
-  });
-}
-
 // This always receive a JSON object with a standard API error
 Ui.error = function (err) {
   if (err.message)
@@ -83,7 +73,7 @@ Ui.error = function (err) {
 EventBus.on('ui:showHome', Ui.showHome)
 EventBus.on('ui:showError', Ui.error)
 EventBus.on('ui:switch:signup', Ui.showSignup)
-EventBus.on('ui:switch:orders', Ui.showOrders)
-
+EventBus.on('ui:switch:orders', Ui.switchContent.bind(null, 'orders'))
 
 module.exports = Ui
+
