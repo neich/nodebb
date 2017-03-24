@@ -12,7 +12,7 @@ var UserLogin = Backbone.View.extend({
   className: 'container',
 
   events: {
-    'click #btn-login': 'submit'
+    'click .btn-login': 'submit'
   },
 
   submit: function () {
