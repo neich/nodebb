@@ -12,7 +12,20 @@
     "exports-loader": "*",
     "imports-loader": "*",
     "babel-loader": "*",
-    "babel-core": "*"
+    "babel-core": "*",
+    "bootstrap-loader": "*",
+    "bootstrap-sass": "*",
+    "style-loader":"*",
+    "css-loader": "*",
+    "resolve-url-loader": "*",
+    "sass-loader": "*",
+    "node-sass": "*",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "url-loader": "*",
+    "file-loader": "*",
+    "font-awesome-loader": "*",
+    "font-awesome": "*"
+
   },
   "scripts": {
     "webpack": "webpack"
