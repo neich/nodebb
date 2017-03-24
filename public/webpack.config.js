@@ -41,6 +41,8 @@ module.exports = {
       },
 
       { test: /bootstrap-sass\/assets\/javascripts\//, use: 'imports-loader?jQuery=jquery' },
+      { test: /backbone/, loader: 'imports-loader?_=underscore,jQuery=jquery' }
+
 
     ]
   }
