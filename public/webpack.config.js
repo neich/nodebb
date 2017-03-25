@@ -40,7 +40,7 @@ module.exports = {
         use: 'file-loader?name=fonts/[name].[ext]',
       },
 
-      { test: /bootstrap-sass\/assets\/javascripts\//, use: 'imports-loader?jQuery=jquery' },
+      { test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, loader: 'imports-loader?jQuery=jquery' },
       { test: /backbone/, loader: 'imports-loader?_=underscore,jQuery=jquery' }
 
 
