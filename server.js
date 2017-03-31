@@ -59,7 +59,14 @@ app.db.init(app.get('env'))
     return app.db.Order.create({description: 'My first order'})
       .then(function(order) {
         return order.setUser(user)
-      });
+      })
+      .then(function() { return user; });
+  })
+  .then(function(user) {
+    return app.db.Order.create({description: 'My second order'})
+      .then(function(order) {
+        return order.setUser(user)
+      })
   })
   .then(function () {
     app.use(require('./routers/noAuthRouter')(app));
