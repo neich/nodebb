@@ -9,5 +9,7 @@ module.exports = function (app) {
 // User registration
   router.post('/api/users', Users.create)
 
+  router.get('/api/users/self', Users.check)
+
   return router;
 }

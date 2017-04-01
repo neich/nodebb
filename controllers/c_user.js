@@ -56,6 +56,11 @@ module.exports = function (app) {
       }).then(util.jsonResponse.bind(util, res))
         .catch(util.sendError.bind(util, res, 400, util.Error.ERR_BAD_REQUEST))
         .done();
+    },
+
+    check: function (req, res) {
+      if (req.session.username) util.jsonResponse(res, {username: req.session.username})
+      else util.sendError(res, 400, util.Error.ERR_AUTHENTICATION, 'User has not signed up')
     }
   }
 }

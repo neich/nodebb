@@ -25,6 +25,10 @@ Api.signup = function (data) {
   });
 };
 
+Api.checkActiveSession = function() {
+  return $.getJSON('/api/users/self')
+}
+
 Api.init = function () {
 
 // Login

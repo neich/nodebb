@@ -1,3 +1,5 @@
+var localStorage = require('../localStorage')
+
 
 var Presenters = {}
 
@@ -10,7 +12,16 @@ Presenters.init = function() {
   Ui.init()
   Login.init()
   Api.init()
-  Router.init()
+  Api.checkActiveSession()
+    .then(function(user) {
+      localStorage.setItem('user', user)
+      Router.init()
+    })
+    .catch(function() {
+      localStorage.removeItem('user')
+      Router.init()
+  })
+    .done()
 }
 
 module.exports = Presenters
