@@ -1,8 +1,10 @@
-exports.jsonResponse = function (res, obj) {
+var util = {}
+
+util.jsonResponse = function (res, obj) {
   res.status(200).json(obj || {message: 'ok'});
 };
 
-exports.throwError = function (code, type, reason, prevErr) {
+util.throwError = function (code, type, reason, prevErr) {
   console.log("Throwing error ...");
   var err =  prevErr ? new Error(reason + ' (' + prevErr.message + ')') : new Error(reason);
   err.type = type;
@@ -10,22 +12,14 @@ exports.throwError = function (code, type, reason, prevErr) {
   throw err;
 }
 
-exports.sendError = function (res, code, type, err) {
+util.sendError = function (res, code, type, err) {
   var json = {};
   json.type = type || error.ERR_UNKNOWN;
   json.message = err.message || err || "Unknown error";
   res.status(code || 500).json({ error: json });
 }
 
-exports.sendAuthError = function (err, req, res, next) {
-  var json = {};
-  json.type = error.ERR_AUTHENTICATION;
-  json.message = err.message || "Authentication error";
-  res.status(400).json({ error: json });
-}
-
-
-exports.addTrans = function (t, obj) {
+util.addTrans = function (t, obj) {
   if (!t) return obj;
   else {
     obj.transaction = t;
@@ -33,7 +27,7 @@ exports.addTrans = function (t, obj) {
   }
 }
 
-exports.checkParams = function (obj, params) {
+util.checkParams = function (obj, params) {
   if (!obj) exports.throwError(400, error.ERR_BAD_REQUEST, "No body found in request");
   for (var i = 0; i < params.length; i++) {
     if (!obj.hasOwnProperty(params[i])) {
@@ -53,5 +47,18 @@ var error = {
 
 }
 
-exports.Error = error;
+util.Error = error;
+
+
+util.isAuthenticated = function(req, res, next) {
+  if (req.session.userId) next()
+  else util.sendError(res, 400, error.ERR_AUTHENTICATION, 'No user is authenticated')
+}
+
+util.istNotAuthenticated = function(req, res, next) {
+  if (req.session.userId) util.sendError(400, error.ERR_AUTHENTICATION, 'User is already authenticated')
+  else next()
+}
+
+module.exports = util
 
