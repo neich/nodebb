@@ -29,6 +29,10 @@ module.exports = function (app) {
     return db.User.find(util.addTrans(t, {where: {username: username}}));
   }
 
+  User.getById = function (id, t) {
+    return db.User.find(util.addTrans(t, {where: {id: id}}));
+  }
+
   User.getByEmail = function (email, t) {
     return db.User.find(util.addTrans(t, {where: {email: email}}));
   }
