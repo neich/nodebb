@@ -5,8 +5,14 @@
 module.exports = function(sequelize, DataTypes) {
 	var Order = sequelize.define('Order', {
 		description : DataTypes.STRING(1024),
-		date : DataTypes.DATE,
-		pending: DataTypes.INTEGER
+		date : {
+			type: DataTypes.DATE,
+			defaultValue: DataTypes.NOW
+		},
+		pending: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0
+		}
 	}, {
 		classMethods : {
 			associate : function(models) {
