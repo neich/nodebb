@@ -23,11 +23,12 @@ module.exports = function (app) {
     },
 
     getById: function (req, res) {
-      if (!req.params.id) util.stdErr500(res, "Missing parameter 'id'");
-      else
-        db.Order.find({where: {id: req.params.id, include: [Client, Shop]}})
-          .success(util.stdSeqSuccess.bindLeft(res), util.stdSeqError.bindLeft(res))
-          .done();
+      util.checkParams(req.params, ['id']);
+
+      dao.Order.getById(req.params.id)
+        .then(util.jsonResponse.bind(util, res))
+        .catch(util.sendError.bind(util, res, 400, util.Error.ERR_BAD_REQUEST))
+        .done();
     },
 
     getOrders: function (req, res) {
