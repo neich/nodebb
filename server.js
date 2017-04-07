@@ -69,8 +69,8 @@ app.db.init(app.get('env'))
       })
   })
   .then(function () {
-    app.use(require('./routers/noAuthRouter')(app));
-    app.use(require('./routers/authRouter')(app));
+    app.use(require('./routers/r_users')(app));
+    app.use(require('./routers/r_orders')(app));
 
     var port = process.env.OPENSHIFT_NODEJS_PORT || app.get('port');
     var ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
@@ -78,7 +78,6 @@ app.db.init(app.get('env'))
     http.createServer(app).listen(port, ip, function () {
       console.log("Express server listening on " + ip + ":" + port);
     })
-
   })
   .catch(function (err) {
     console.log("Error initializing database: " + err);
