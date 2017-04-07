@@ -11,9 +11,9 @@ module.exports = function (app) {
       util.checkParams(req.body, ['description', 'date']);
 
       db.sequelize.transaction(function (t) {
-        return dao.User.getByUsername(req.session.username, t)
+        return dao.User.getById(req.session.userId, t)
           .then(function (user) {
-            if (!user) util.sendError(400, util.Error.ERR_ENTITY_NOT_FOUND, "User from token does not exist");
+            if (!user) util.sendError(400, util.Error.ERR_ENTITY_NOT_FOUND, "User from session does not exist");
             else return dao.Order.create(req.body, user, t);
           })
       })
@@ -32,7 +32,7 @@ module.exports = function (app) {
     },
 
     getOrders: function (req, res) {
-      dao.Order.getUserOrders(req.session.username, {})
+      dao.Order.getUserOrders(req.session.userId, {})
         .then(util.jsonResponse.bind(util, res))
         .catch(util.sendError.bind(util, res, 400, util.Error.ERR_BAD_REQUEST))
         .done();
