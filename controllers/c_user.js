@@ -23,8 +23,8 @@ module.exports = function (app) {
 
       dao.User.checkPassword(req.body.username, req.body.password)
         .then(function (user) {
-          req.session.username = user.username
-          util.jsonResponse(res, {username: user.username});
+          req.session.userId = user.id
+          util.jsonResponse(res, {userId: user.id});
         })
         .catch(util.sendError.bind(util, res, 400, util.Error.ERR_BAD_REQUEST))
         .done();
@@ -59,7 +59,7 @@ module.exports = function (app) {
     },
 
     check: function (req, res) {
-      if (req.session.username) util.jsonResponse(res, {username: req.session.username})
+      if (req.session.userId) util.jsonResponse(res, {userId: req.session.userId})
       else util.sendError(res, 400, util.Error.ERR_AUTHENTICATION, 'User has not signed up')
     }
   }
