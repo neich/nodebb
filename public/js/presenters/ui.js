@@ -16,28 +16,29 @@ var lastHeader = null
 var lastContent = null
 
 Ui.switchContent = function (widget) {
+  if (lastContent) lastContent.undelegateEvents()
 
   var args = Array.prototype.slice.call(arguments)
   args.shift()
   switch (widget) {
     case 'login': {
-      new UserLogin({el: $content, eventBus: EventBus}).render()
+      lastContent = new UserLogin({el: $content, eventBus: EventBus}).render()
       break
     }
     case 'signup': {
-      new UserSignup({el: $content, eventBus: EventBus}).render()
+      lastContent = new UserSignup({el: $content, eventBus: EventBus}).render()
       break
     }
     case 'orders': {
       if (localStorage.hasItem('user')) {
         orderList.fetch({
           success: function () {
-            new OrdersView({el: $content, eventBus: EventBus, collection: orderList}).render()
+            lastContent = new OrdersView({el: $content, eventBus: EventBus, collection: orderList}).render()
           },
           error: Ui.error
         });
       } else
-        Ui.showHome()
+        Ui.switchContent('login')
       break
     }
   }
