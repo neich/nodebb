@@ -28,10 +28,10 @@ util.addTrans = function (t, obj) {
 }
 
 util.checkParams = function (obj, params) {
-  if (!obj) exports.throwError(400, error.ERR_BAD_REQUEST, "No body found in request");
+  if (!obj) util.throwError(400, error.ERR_BAD_REQUEST, "No body found in request");
   for (var i = 0; i < params.length; i++) {
     if (!obj.hasOwnProperty(params[i])) {
-      exports.throwError(400, error.ERR_MISSING_PARAMETER, "Missing parameter (" + params[i] + ") in request");
+      util.throwError(400, error.ERR_MISSING_PARAMETER, "Missing parameter (" + params[i] + ") in request");
     }
   }
 }
