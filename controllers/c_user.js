@@ -24,10 +24,18 @@ module.exports = function (app) {
       dao.User.checkPassword(req.body.username, req.body.password)
         .then(function (user) {
           req.session.userId = user.id
-          util.jsonResponse(res, {userId: user.id});
+          req.session.username = user.username
+          util.jsonResponse(res, {userId: user.id, username: user.username});
         })
         .catch(util.sendError.bind(util, res, 400, util.Error.ERR_BAD_REQUEST))
         .done();
+    },
+
+    logout: function (req, res) {
+      if (!req.session.userId) util.sendError(res, 400, util.Error.ERR_AUTHENTICATION, 'Not logged in!')
+      delete req.session.userId
+      delete req.session.username
+      util.jsonResponse(res, {})
     },
 
     create: function (req, res) {
@@ -59,7 +67,7 @@ module.exports = function (app) {
     },
 
     check: function (req, res) {
-      if (req.session.userId) util.jsonResponse(res, {userId: req.session.userId})
+      if (req.session.userId) util.jsonResponse(res, {userId: req.session.userId, username: req.session.username})
       else util.sendError(res, 400, util.Error.ERR_AUTHENTICATION, 'User has not signed up')
     }
   }
