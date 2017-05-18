@@ -12,6 +12,9 @@ var orderList = new CollectionOrder({eventBus: EventBus})
 
 var $content = $('#content')
 
+var lastHeader = null
+var lastContent = null
+
 Ui.switchContent = function (widget) {
 
   var args = Array.prototype.slice.call(arguments)
@@ -46,7 +49,8 @@ Ui.init = function () {
 }
 
 Ui.showHome = function () {
-  new HeaderView({el: '#header', eventBus: EventBus, user: localStorage.getItem('user')}).render()
+  if (lastHeader) lastHeader.undelegateEvents()
+  lastHeader = new HeaderView({el: '#header', eventBus: EventBus, user: localStorage.getItem('user')}).render()
   if (localStorage.hasItem('user')) {
     Ui.switchContent('orders')
   } else {
