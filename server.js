@@ -69,8 +69,8 @@ app.db.init(app.get('env'))
       })
   })
   .then(function () {
-    app.use(require('./routers/r_users')(app));
-    app.use(require('./routers/r_orders')(app));
+    app.use('/api/users', require('./routers/r_users')(app));
+    app.use('/api/orders', require('./routers/r_orders')(app));
 
     var port = process.env.OPENSHIFT_NODEJS_PORT || app.get('port');
     var ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
