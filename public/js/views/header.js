@@ -6,6 +6,8 @@ var Header = Backbone.View.extend({
 
   initialize: function (params) {
     this.template = _.template(t_header)
+    this.eventBus = params.eventBus
+
     if (params.user)
       this.setUserData(params.user)
 
@@ -16,6 +18,10 @@ var Header = Backbone.View.extend({
     })
   },
 
+  events: {
+    'click .glyphicon-log-out' : 'logout'
+  },
+
   render: function () {
     this.$el.html(this.template({user: userData}))
     return this
@@ -23,6 +29,10 @@ var Header = Backbone.View.extend({
 
   setUserData: function (user) {
     userData = user
+  },
+
+  logout: function() {
+    this.eventBus.trigger('view:logout:request')
   }
 
 })
