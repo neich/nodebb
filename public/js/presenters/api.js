@@ -14,6 +14,16 @@ Api.login = function (data) {
   })
 };
 
+Api.logout = function (data) {
+  return $.ajax({
+    url: '/api/users/logout',
+    dataType: 'json',
+    type: 'post',
+    contentType: 'application/json',
+    processData: false,
+  })
+};
+
 Api.signup = function (data) {
   return $.ajax({
     url: '/api/users',
@@ -46,6 +56,22 @@ Api.init = function () {
   })
 
   EventBus.on('api:login:error', EventBus.trigger.bind(EventBus, 'ui:showError'))
+
+// Logout
+
+  EventBus.on('api:logout', function () {
+    Api.logout()
+      .then(EventBus.trigger.bind(EventBus, 'api:logout:successful'))
+      .catch(EventBus.trigger.bind(EventBus, 'api:logout:error'))
+      .done()
+  })
+
+  EventBus.on('api:logout:successful', function () {
+    localStorage.removeItem('user');
+    EventBus.trigger('ui:showHome')
+  })
+
+  EventBus.on('api:logout:error', EventBus.trigger.bind(EventBus, 'ui:showError'))
 
 // Signup
 
