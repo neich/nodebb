@@ -11,10 +11,10 @@ module.exports = function (app) {
   var router = express.Router()
 
   // User login
-  router.post('/login', util.istNotAuthenticated, Users.login)
+  router.post('/login', util.isNotAuthenticated, Users.login)
   router.post('/logout', util.isAuthenticated, Users.logout)
   // User registration
-  router.post('/', util.istNotAuthenticated, Users.create)
+  router.post('/', util.isNotAuthenticated, Users.create)
   // Check if user is logged in
   router.get('/self', util.isAuthenticated, Users.check)
   // Get all ordeers belonging to the signed in user
