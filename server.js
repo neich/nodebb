@@ -34,19 +34,6 @@ app.use(session({
 
 app.use(serveStatic(path.join(__dirname, 'public'), {'index': ['index.html', 'index.htm']}));
 
-app.use(function (err, req, res, next) {
-  var code = err.code || 500;
-  var json = {};
-  json.type = err.type || "ERROR_UNKNOWN";
-  json.name = err.name || "UNKNOWN";
-  json.message = err.message || "Unknown error";
-  json.stack = err.stack || "No stack trace available";
-  res.status(code).send({
-    error: json
-  });
-});
-
-
 // Database initialization
 
 app.db = require('./models')
@@ -71,6 +58,19 @@ app.db.init(app.get('env'))
   .then(function () {
     app.use('/api/users', require('./routers/r_users')(app));
     app.use('/api/orders', require('./routers/r_orders')(app));
+
+    app.use(function (err, req, res, next) {
+      var code = err.code || 500;
+      var json = {};
+      json.type = err.type || "ERROR_UNKNOWN";
+      json.name = err.name || "UNKNOWN";
+      json.message = err.message || "Unknown error";
+      if (!err.message) json.stack = err.stack || "No stack trace available";
+      res.status(code).json({
+        error: json
+      });
+    });
+
 
     var port = process.env.OPENSHIFT_NODEJS_PORT || app.get('port');
     var ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
