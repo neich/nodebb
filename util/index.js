@@ -55,8 +55,8 @@ util.isAuthenticated = function(req, res, next) {
   else util.sendError(res, 400, error.ERR_AUTHENTICATION, new Error('User is not logged in'))
 }
 
-util.istNotAuthenticated = function(req, res, next) {
-  if (req.session.userId) util.sendError(400, error.ERR_AUTHENTICATION, new Error('User is already authenticated'))
+util.isNotAuthenticated = function(req, res, next) {
+  if (req.session.userId) util.sendError(res, 400, error.ERR_AUTHENTICATION, new Error('User is already authenticated'))
   else next()
 }
 
