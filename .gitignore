@@ -5,3 +5,5 @@ node_modules
 *.iml
 public/js/main.min.js
 /public/fonts/*
+*.log
+*.lock
