@@ -6,4 +6,5 @@ node_modules
 public/js/main.min.js
 /public/fonts/*
 *.log
-*.lock
+*-lock.json
+*.min.js
