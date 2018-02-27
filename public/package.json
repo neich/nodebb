@@ -15,7 +15,7 @@
     "babel-core": "*",
     "bootstrap-loader": "*",
     "bootstrap-sass": "*",
-    "style-loader":"*",
+    "style-loader": "*",
     "css-loader": "*",
     "resolve-url-loader": "*",
     "sass-loader": "*",
@@ -25,7 +25,6 @@
     "file-loader": "*",
     "font-awesome-loader": "*",
     "font-awesome": "*"
-
   },
   "scripts": {
     "webpack": "webpack"
