@@ -1,12 +1,13 @@
 var debug = process.env.NODE_ENV !== 'production';
+const path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
   devtool: debug ? 'inline-sourcemap' : null,
   entry: [
-    'font-awesome-loader',
-    __dirname +'/js/main.js'
+      'font-awesome-loader',
+      path.join(__dirname, 'js/main.js')
   ],
   output: {
     path: __dirname,
@@ -19,7 +20,6 @@ module.exports = {
     })] : [
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
       new webpack.ProvidePlugin({
         $ : 'jquery',
         Backbone : 'backbone',
