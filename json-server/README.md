@@ -10,3 +10,4 @@ To run the application:
 - Execute `npm start`
 - Load `http://localhost:3000`
 
+Before executing these steps, the web application has to be already generated in the parent ```../public``` folder (webpack)
