@@ -1,6 +1,14 @@
+const path = require('path');
+
+// json-server
 const jsonServer = require('json-server')
 const server = jsonServer.create()
+
+// Routes
 const router = jsonServer.router('db.json')
+const addCustomRoutes = require('./extra_routes')
+
+// Middleware
 const middlewares = jsonServer.defaults()
 const morgan = require('morgan')
 const bodyParser = require('body-parser');
@@ -8,7 +16,6 @@ const methodOverride = require('method-override');
 const serveStatic = require('serve-static');
 const session = require('express-session')
 const cors = require('cors');
-const path = require('path');
 
 server.use(middlewares)
 server.use(morgan('combined'))
@@ -25,8 +32,9 @@ server.use(session({
     resave: true,
     saveUninitialized: true
 }))
-
 server.use(serveStatic(path.join(__dirname, '../public'), {'index': ['index.html', 'index.htm']}))
+
+addCustomRoutes(server, router)
 
 server.use(router)
 

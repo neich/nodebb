@@ -60,5 +60,9 @@ util.isNotAuthenticated = function(req, res, next) {
   else next()
 }
 
+util.jsonSchemaError = function(v) {
+  return 'Property: ' + v.errors[0].property + ' -> ' + v.errors[0].message
+}
+
 module.exports = util
 
