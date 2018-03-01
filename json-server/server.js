@@ -6,7 +6,7 @@ const server = jsonServer.create()
 
 // Routes
 const router = jsonServer.router('db.json')
-const addCustomRoutes = require('./extra_routes')
+const addAuth = require('./auth')
 
 // Middleware
 const middlewares = jsonServer.defaults()
@@ -16,6 +16,8 @@ const methodOverride = require('method-override');
 const serveStatic = require('serve-static');
 const session = require('express-session')
 const cors = require('cors');
+
+const lodashId = require('lodash-id')
 
 server.use(middlewares)
 server.use(morgan('combined'))
@@ -34,7 +36,10 @@ server.use(session({
 }))
 server.use(serveStatic(path.join(__dirname, '../public'), {'index': ['index.html', 'index.htm']}))
 
-addCustomRoutes(server, router)
+// Add id-based entities to the database
+router.db._.mixin(lodashId)
+
+addAuth(server, router)
 
 server.use(router)
 
