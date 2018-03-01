@@ -59,10 +59,20 @@ module.exports = function (server, router) {
             }
         }
 
+        function authMiddleware_GET_Collection(req, res, next) {
+            if (!req.session.userId)
+                util.sendError(res, 400, util.Error.ERR_BAD_REQUEST, 'No authenticated user')
+            else {
+                req.query.userId = req.session.userId
+                next()
+            }
+        }
+
         server.get('/' + entity + '/:id', authMiddleware_GET_PUT_DELETE);
         server.put('/' + entity + '/:id', authMiddleware_GET_PUT_DELETE);
         server.delete('/' + entity + '/:id', authMiddleware_GET_PUT_DELETE);
         server.post('/' + entity, authMiddleware_POST)
+        server.get('/' + entity, authMiddleware_GET_Collection)
     }
 
     // Call this function for each entity that has ownership wrt users
