@@ -1,7 +1,11 @@
 var util = {}
 
 util.jsonResponse = function (res, obj) {
-  res.status(200).json(obj || {message: 'ok'});
+  obj = obj || 'ok'
+  if (typeof obj === 'string')
+      res.status(200).json({message: obj})
+  else
+    res.status(200).json(obj);
 };
 
 util.throwError = function (code, type, reason, prevErr) {
