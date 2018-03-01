@@ -1,10 +1,36 @@
 {
   "users": [
-    { "id": 1, "username": "jo", "password": "jo", "email": "jo@jo.com" }
+    {
+      "username": "jo",
+      "email": "jo@jo.com",
+      "password": "jo",
+      "id": "743b3b32-bded-4ddb-b0eb-9abba823f970"
+    },
+    {
+      "username": "tu",
+      "email": "tu@tu.com",
+      "password": "tu",
+      "id": "a4244b0e-01c3-443f-bb4b-e907fdb476f0"
+    }
   ],
   "orders": [
-    { "id": 1, "description": "My first order", "userId": 1 },
-    { "id": 2, "description": "My second order", "userId": 1 }
+    {
+      "description": "La meva tasca",
+      "userId": "743b3b32-bded-4ddb-b0eb-9abba823f970",
+      "id": "09756e8a-086c-4308-9be4-995bacbfd247"
+    },
+    {
+      "description": "Una tasca mes",
+      "userId": "a4244b0e-01c3-443f-bb4b-e907fdb476f0",
+      "id": "aff3c1f2-9b47-461e-a710-be34d3b9dd82"
+    },
+    {
+      "description": "Una altra tasca per fer",
+      "userId": "a4244b0e-01c3-443f-bb4b-e907fdb476f0",
+      "id": "e3bd6907-3e15-4d96-95a2-ffb20ae3c886"
+    }
   ],
-  "profile": { "name": "typicode" }
+  "profile": {
+    "name": "typicode"
+  }
 }
