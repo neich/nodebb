@@ -78,7 +78,7 @@ module.exports = function (server, router) {
     // Call this function for each entity that has ownership wrt users
     addAuthorization(server, 'orders')
 
-    server.post('/users/login', function (req, res) {
+    server.post('/users/login', util.isNotAuthenticated, function (req, res) {
         var v = validate(req.body, userSchemaLogin)
 
         if (!v.valid)
@@ -99,7 +99,7 @@ module.exports = function (server, router) {
         }
     })
 
-    server.post('/users/logout', function (req, res) {
+    server.post('/users/logout', util.isAuthenticated, function (req, res) {
         if (!req.session.userId)
             util.sendError(res, 400, util.Error.ERR_BAD_REQUEST, 'No authenticated user')
         else {
@@ -109,7 +109,7 @@ module.exports = function (server, router) {
         }
     })
 
-    server.post('/users', function (req, res) {
+    server.post('/users', util.isNotAuthenticated, function (req, res) {
         if (req.session.userId)
             util.sendError(res, 400, util.Error.ERR_BAD_REQUEST, 'You are already logged in')
         else {
