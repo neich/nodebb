@@ -8,3 +8,4 @@ public/js/main.min.js
 *.log
 *-lock.json
 *.min.js
+json-server/data/*
