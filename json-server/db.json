@@ -11,12 +11,6 @@
       "email": "tu@tu.com",
       "password": "tu",
       "id": 2
-    },
-    {
-      "username": "eink",
-      "email": "ein@ein.com",
-      "password": "ein",
-      "id": 3
     }
   ],
   "orders": [
