@@ -4,30 +4,36 @@
       "username": "jo",
       "email": "jo@jo.com",
       "password": "jo",
-      "id": "743b3b32-bded-4ddb-b0eb-9abba823f970"
+      "id": 1
     },
     {
       "username": "tu",
       "email": "tu@tu.com",
       "password": "tu",
-      "id": "a4244b0e-01c3-443f-bb4b-e907fdb476f0"
+      "id": 2
+    },
+    {
+      "username": "eink",
+      "email": "ein@ein.com",
+      "password": "ein",
+      "id": 3
     }
   ],
   "orders": [
     {
       "description": "La meva tasca",
-      "userId": "743b3b32-bded-4ddb-b0eb-9abba823f970",
-      "id": "09756e8a-086c-4308-9be4-995bacbfd247"
+      "userId": 1,
+      "id": 1
     },
     {
       "description": "Una tasca mes",
-      "userId": "a4244b0e-01c3-443f-bb4b-e907fdb476f0",
-      "id": "aff3c1f2-9b47-461e-a710-be34d3b9dd82"
+      "userId": 1,
+      "id": 2
     },
     {
       "description": "Una altra tasca per fer",
-      "userId": "a4244b0e-01c3-443f-bb4b-e907fdb476f0",
-      "id": "e3bd6907-3e15-4d96-95a2-ffb20ae3c886"
+      "userId": 2,
+      "id": 3
     }
   ],
   "images": [],
