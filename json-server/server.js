@@ -19,8 +19,6 @@ const session = require('express-session')
 const cors = require('cors')
 const fileUpload = require('express-fileupload')
 
-const lodashId = require('lodash-id')
-
 server.use(middlewares)
 server.use(morgan('combined'))
 server.use(bodyParser.json())
@@ -38,9 +36,6 @@ server.use(session({
     saveUninitialized: true
 }))
 server.use(serveStatic(path.join(__dirname, '../public'), {'index': ['index.html', 'index.htm']}))
-
-// Add id-based entities to the database
-router.db._.mixin(lodashId)
 
 addAuth(server, router)
 addFileUpload(server, router)
