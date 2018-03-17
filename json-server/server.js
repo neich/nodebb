@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 
 // json-server
 const jsonServer = require('json-server')
@@ -6,6 +7,8 @@ const server = jsonServer.create()
 
 // Routes
 const router = jsonServer.router('db.json')
+var routes = JSON.parse(fs.readFileSync('routes.json'));
+server.use(jsonServer.rewriter(routes));
 const addAuth = require('./auth')
 const addFileUpload = require('./images')
 
