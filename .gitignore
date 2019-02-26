@@ -3,9 +3,5 @@ node_modules
 .project
 .idea
 *.iml
-public/js/main.min.js
-/public/fonts/*
 *.log
-*-lock.json
 *.min.js
-json-server/data/*

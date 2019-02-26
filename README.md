@@ -82,7 +82,7 @@ Both client and server are in the same folder tree. The server app is located at
     |-- templates             (Underscore templates)
     |-- index.html            (Static html, main app structure)
     |-- package.json
-    |-- webpack.config.js
+    |-- webpack.config.dev.js
 
 ```
 

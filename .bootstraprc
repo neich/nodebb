@@ -3,7 +3,7 @@
 # loglevel: debug
 
 # Major version of Bootstrap: 3 or 4
-bootstrapVersion: 3
+bootstrapVersion: 4
 
 # If Bootstrap version 3 is used - turn on/off custom icon font path
 useCustomIconFontPath: false
@@ -35,7 +35,7 @@ extractStyles: false
 # For example, _variables.scss contains:
 # $input-color: $gray !default;
 # This means you can define $input-color before we load _variables.scss
-preBootstrapCustomizations: ./styles/bs-pre-customizations.scss
+preBootstrapCustomizations: ./src/styles/bs-pre-customizations.scss
 
 # This gets loaded after bootstrap/variables is loaded and before bootstrap is loaded.
 # A good example of this is when you want to override a bootstrap variable to be based
@@ -49,13 +49,14 @@ preBootstrapCustomizations: ./styles/bs-pre-customizations.scss
 # this in bootstrapCustomizations to make the input height 10% bigger than the default calculation.
 # Thus you can leverage the default calculations.
 # $input-height: $input-height * 1.10;
-bootstrapCustomizations: ./styles/bs-customizations.scss
+bootstrapCustomizations: ./src/styles/bs-customizations.scss
 
 # Import your custom styles here. You have access to all the bootstrap variables. If you require
 # your sass files separately, you will not have access to the bootstrap variables, mixins, clases, etc.
 # Usually this endpoint-file contains list of @imports of your application styles.
-appStyles: ./styles/app.scss
+appStyles: ./src/styles/app.scss
 
+### Bootstrap styles
 ### Bootstrap styles
 styles:
 
@@ -63,63 +64,56 @@ styles:
   mixins: true
 
   # Reset and dependencies
-  normalize: true
   print: true
-  glyphicons: true
 
   # Core CSS
-  scaffolding: true
-  type: true
-  code: true
-  grid: true
-  tables: true
-  forms: true
   buttons: true
+  code: true
+  forms: true
+  grid: true
+  images: true
+  reboot: true
+  tables: true
+  type: true
 
   # Components
-  component-animations: true
-  dropdowns: true
-  button-groups: true
-  input-groups: true
-  navs: true
-  navbar: true
-  breadcrumbs: true
-  pagination: true
-  pager: true
-  labels: true
-  badges: true
-  jumbotron: true
-  thumbnails: true
-  alerts: true
-  progress-bars: true
-  media: true
-  list-group: true
-  panels: true
-  wells: true
-  responsive-embed: true
+  alert: true
+  badge: true
+  breadcrumb: true
+  button-group: true
+  card: true
   close: true
+  custom-forms: true
+  dropdown: true
+  input-group: true
+  jumbotron: true
+  list-group: true
+  media: true
+  nav: true
+  navbar: true
+  pagination: true
+  progress: true
+  transitions: true
 
   # Components w/ JavaScript
-  modals: true
-  tooltip: true
-  popovers: true
   carousel: true
+  modal: true
+  popover: true
+  tooltip: true
 
   # Utility classes
   utilities: true
-  responsive-utilities: true
 
 ### Bootstrap scripts
 scripts:
-  transition: true
   alert: true
   button: true
   carousel: true
   collapse: true
   dropdown: true
   modal: true
-  tooltip: true
   popover: true
   scrollspy: true
   tab: true
-  affix: true
+  tooltip: true
+  util: true
