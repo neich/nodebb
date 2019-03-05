@@ -1,28 +1,33 @@
-<div class="card mx-auto">
-    <div class="card-header">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Actions
-            </button>
+<div class="row">
+    <div class="order-list col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                    </button>
 
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li class="dropdown-item"><a href="http://www.jquery2dotnet.com">Edit</a>
-                </li>
-                <li class="dropdown-item"><a href="http://www.jquery2dotnet.com"><span
-                        class="glyphicon glyphicon-trash"></span>Delete</a>
-                </li>
-                <li class="dropdown-item"><a href="http://www.jquery2dotnet.com"><span
-                        class="glyphicon glyphicon-flag"></span>Flag</a>
-                </li>
-            </ul>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li class="dropdown-item"><a href="http://www.jquery2dotnet.com">Edit</a>
+                        </li>
+                        <li class="dropdown-item"><a href="http://www.jquery2dotnet.com"><span
+                                class="glyphicon glyphicon-trash"></span>Delete</a>
+                        </li>
+                        <li class="dropdown-item"><a href="http://www.jquery2dotnet.com"><span
+                                class="glyphicon glyphicon-flag"></span>Flag</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                </ul>
+            </div>
+            <div class="card-footer">
+                <h6>Total Count <span class="label label-info"><%= orders.length %></span></h6>
+            </div>
         </div>
     </div>
-    <div class="panel-body">
-        <ul class="list-group list-group-flush">
-        </ul>
-    </div>
-    <div class="card-footer">
-        <h6>Total Count <span class="label label-info"><%= orders.length %></span></h6>
-    </div>
+    <div class="order-detail col-md-3"></div>
 </div>
