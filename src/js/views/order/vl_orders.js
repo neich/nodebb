@@ -12,7 +12,8 @@ const OrderListView = Backbone.View.extend({
     this.template = _.template(tl_order);
 
     this.localEventBus = _.extend({}, Backbone.Events);
-    this.localEventBus.on('view:order:detail', this.detail.bind(this));
+    this.localEventBus.on('view:order:showDetail', this.showDetail.bind(this));
+    this.localEventBus.on('view:order:hideDetail', this.hideDetail.bind(this));
 
   },
 
@@ -29,11 +30,20 @@ const OrderListView = Backbone.View.extend({
     return this;
   },
 
-  detail: function(id) {
+  showDetail: function(id) {
     this.$el.find('.order-list').addClass('col-md-9').removeClass('col-md-12');
     const $orderDetail = this.$el.find('.order-detail');
-    new OrderDetailView({el: $orderDetail, model: this.collection.get(id)}).render();
+    new OrderDetailView({
+      el: $orderDetail,
+      model: this.collection.get(id),
+      eventBus: this.localEventBus
+    }).render();
     $orderDetail.show();
+  },
+
+  hideDetail: function() {
+    this.$el.find('.order-detail').hide();
+    this.$el.find('.order-list').addClass('col-md-12').removeClass('col-md-9');
   }
 
 });
