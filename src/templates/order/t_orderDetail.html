@@ -1,6 +1,9 @@
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Order nº <%= order.get('id') %></h3>
+        <h3 class="card-title float-left">Order nº <%= order.get('id') %></h3>
+        <button type="button" class="close float-right" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="card-body">
         <p>Description: <%= order.get('description') %></p>
