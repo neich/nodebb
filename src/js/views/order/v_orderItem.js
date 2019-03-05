@@ -11,7 +11,7 @@ const OrderItemView = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.html(this.template({o: this.model}));
+    this.$el.html(this.template({order: this.model}));
     return this;
   }
 
