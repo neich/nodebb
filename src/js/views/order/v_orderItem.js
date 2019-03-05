@@ -20,7 +20,7 @@ const OrderItemView = Backbone.View.extend({
   },
 
   detail: function() {
-    this.eventBus.trigger('view:order:detail', this.model.get('id'));
+    this.eventBus.trigger('view:order:showDetail', this.model.get('id'));
   }
 
 });
