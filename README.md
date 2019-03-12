@@ -15,11 +15,16 @@ The technologies used are:
 * Backbone 1.3
 * Bootstrap 4
 
+Prerequisites:
+
+* [Nodejs](https://nodejs.org) installed
+* [Yarn](https://yarnpkg.com) installed
+
 To run the application:
 
 - Clone and execute [`json-server-plus`](https://github.com/neich/json-server-plus)
 - Clone this repo
-- Execute `yarn`
+- Execute `yarn install`
 - Execute `npm run start`. This starts a [webpack dev server](https://github.com/webpack/webpack-dev-server)
 - Load the project at `http://localhost:9000`
 
