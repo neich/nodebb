@@ -8,7 +8,7 @@ import OrdersView from '~/views/order/vl_orders';
 
 const Ui = {};
 
-const orderList = new CollectionOrder({eventBus: EventBus});
+const orderList = new CollectionOrder();
 
 const $content = $('#content');
 
