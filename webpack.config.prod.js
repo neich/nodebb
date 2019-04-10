@@ -5,9 +5,11 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'production',
+
     entry: [
         'bootstrap-loader', path.join(__dirname, './src/js/main.js')
     ],
@@ -16,12 +18,6 @@ module.exports = {
         filename: '[name].[chunkhash:8].js',
         chunkFilename: '[name].[chunkhash:8].chunk.js'
     },
-    optimization: {
-    splitChunks: {
-        chunks: "all",
-            minSize: 0
-    }
-},
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -30,10 +26,10 @@ module.exports = {
         }),
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-             title: 'Exemple PEW',
-             template: path.join(__dirname, 'src/index.html'),
-         }),
-        new webpack.SourceMapDevToolPlugin({})
+            title: 'Exemple PEW',
+            template: path.join(__dirname, 'src/index.html'),
+        }),
+        new CopyWebpackPlugin([{from: path.join(__dirname, 'src/assets/images'), to: path.join(__dirname, 'dist/images'),}])
     ],
     module: {
         rules: [
