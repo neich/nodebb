@@ -5,10 +5,11 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.join(__dirname, 'src/assets'),
         compress: true,
         port: 9000,
         proxy: { '/api': 'http://localhost:3000' }
@@ -32,7 +33,8 @@ module.exports = {
         new HtmlWebpackPlugin({
              title: 'Exemple PEW',
              template: path.join(__dirname, 'src/index.html'),
-         })
+         }),
+        new CopyWebpackPlugin([{from: 'src/assets/images', to: 'dist/images'}])
     ],
     module: {
         rules: [

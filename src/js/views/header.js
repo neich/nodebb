@@ -11,8 +11,7 @@ const Header = Backbone.View.extend({
     this.template = _.template(t_header);
     this.eventBus = params.eventBus;
 
-    if (params.user)
-      this.setUserData(params.user);
+    this.setUserData(params.user);
 
     const view = this;
     params.eventBus.on('localstorage:set:user', function(user) {
@@ -22,7 +21,7 @@ const Header = Backbone.View.extend({
   },
 
   events: {
-    'click .glyphicon-log-out' : 'logout'
+    'click .logout' : 'logout'
   },
 
   render: function () {
